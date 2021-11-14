@@ -46,6 +46,7 @@
     <Compile Include="Gambler.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="KinoDraw.cs" />
+    <Compile Include="NumberOfGamblers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

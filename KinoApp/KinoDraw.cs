@@ -19,6 +19,7 @@ namespace KinoApp
         int counter = 0;
         public int DrawNumbers()
         {
+            Console.WriteLine("\n The Lucky Numbers are:");
             do
             {
                 int newNumber = GenerateNumber();
@@ -34,13 +35,6 @@ namespace KinoApp
             return 1;
         }
 
-       
-
-
-    
-    
-
-        
         public int GenerateNumber() 
         {
 
@@ -58,7 +52,5 @@ namespace KinoApp
             return sb.ToString();
         }
     }
-
-
     
 }

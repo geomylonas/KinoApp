@@ -22,8 +22,6 @@ namespace KinoApp
             int newNumber;
             string choice = PlayKinoBonus();
 
-
-
             for (int i = 0; i < GamblerChoices.Length; i++)
             {
                 if (i > 0)
@@ -57,6 +55,44 @@ namespace KinoApp
                     GamblerChoices[i] = newNumber;
                 }
             }
+
+        }
+        
+        public void PopulateRandomChoices(Random kinoRandom, Random randomNumber)
+        {
+            Gambler gambler = new Gambler();
+
+            Kinobonus = kinoRandom.Next(2) == 1;
+            if(Kinobonus)
+            {
+                Console.WriteLine("\n You played Kino Bonus");
+            }
+            else
+            {
+                Console.WriteLine("\n You did NOT play Kino Bonus");
+            }
+
+            for (int i = 0; i < GamblerChoices.Length; i++)
+            {
+                
+                gambler.GamblerChoices[i] = randomNumber.Next(1,81);
+                
+
+                if (GamblerChoices.Contains(gambler.GamblerChoices[i]))
+                {
+                    i--;
+                    continue;
+                }
+                else
+                {
+                    GamblerChoices[i] = gambler.GamblerChoices[i];
+                }
+            }
+
+            //foreach (var item in gambler.GamblerChoices)
+            //{
+            //    Console.Write(item + "\t");
+            //}
         }
 
 
@@ -68,8 +104,6 @@ namespace KinoApp
             {
                 Console.WriteLine("Do you want to play kino bonus (Y/N)?");
                 choice = Console.ReadLine().ToUpper();
-
-
             } while (choice != "Y" && choice != "N");
 
             if (choice == "Y")
@@ -83,5 +117,6 @@ namespace KinoApp
 
             return choice;
         }
+        
     }
 }

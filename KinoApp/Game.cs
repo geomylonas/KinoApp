@@ -11,7 +11,7 @@ namespace KinoApp
         public Gambler Gambler { get; set; }
         public KinoDraw KinoDraw { get; set; }
 
-        public List<int> NumbersFound { get; set; }
+        public Dictionary<Gambler,List<int>> NumbersFoundPerPlayer { get; set; }
 
 
         public Game()
@@ -19,31 +19,32 @@ namespace KinoApp
 
             Gambler = new Gambler();
             KinoDraw = new KinoDraw();
-            NumbersFound = new List<int>();
+            NumbersFoundPerPlayer = new Dictionary<Gambler,List<int>>();
         }
-        public Game(Gambler gambler, KinoDraw kinoDraw)
-        {
-            Gambler = gambler;
-            KinoDraw = kinoDraw;
-            NumbersFound = new List<int>();
-        }
+        //public Game(Gambler gambler, KinoDraw kinoDraw)
+        //{
+        //    Gambler = gambler;
+        //    KinoDraw = kinoDraw;
+        //    NumbersFound = new List<int>();
+        //}
 
-        
-        public List<int> CheckNumbers()
+        public Dictionary<Gambler,List<int>> CheckNumbers(Gambler gambler)
         {
-            foreach (int numberPlayed in Gambler.GamblerChoices)
+            List<int> listOfSuccesses = new List<int>();
+            foreach (int numberPlayed in gambler.GamblerChoices)
             {
                 if (KinoDraw.Numbers.Contains(numberPlayed))
                 {
-                    NumbersFound.Add(numberPlayed);
+                    listOfSuccesses.Add(numberPlayed);
                 }
             }
-            return NumbersFound;
+            NumbersFoundPerPlayer.Add(gambler, listOfSuccesses);
+            return NumbersFoundPerPlayer;
         }
 
-        public bool CheckKinoBonus()
+        public bool CheckKinoBonus(Gambler gambler)
         {
-            if (NumbersFound.Contains(KinoDraw.Numbers[KinoDraw.Numbers.Length - 1]))
+            if (NumbersFoundPerPlayer[gambler].Contains(KinoDraw.Numbers[KinoDraw.Numbers.Length - 1]))
             {
                 Console.WriteLine("You matched KINO BONUS!!!");
                 return true;
@@ -57,21 +58,23 @@ namespace KinoApp
 
         public void PlayGame()
         {
+            NumberOfGamblers numberOfGamblers = new NumberOfGamblers();
+            numberOfGamblers.PopulateGamblers();
             KinoDraw.DrawNumbers();
             Console.WriteLine(KinoDraw.ToString());
-            Gambler.PopulateChoices();
-            CheckNumbers();
-            
-            Console.WriteLine($"Gambler has matched {NumbersFound.Count} numbers!");
-            if (Gambler.Kinobonus)
+
+            foreach (var gambler in numberOfGamblers.Gamblers)
             {
-                CheckKinoBonus();
+                CheckNumbers(gambler);
+
+                Console.WriteLine($"Gambler has matched {NumbersFoundPerPlayer[gambler].Count} numbers!");
+                if (gambler.Kinobonus)
+                {
+                    CheckKinoBonus(gambler);
+                }
             }
-
-
-        }
-
             
+        }
 
     }
 }
