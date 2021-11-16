@@ -10,10 +10,13 @@ namespace KinoApp
     {
         public int[] GamblerChoices { get; set; }
         public bool Kinobonus { get; set; }
+        public static int Counter = 0;
+        public int GamblerID { get; private set; }
 
         public Gambler()
         {
             GamblerChoices = new int[6];
+            GamblerID = Counter++;
         }
 
         public void PopulateChoices()
@@ -60,7 +63,7 @@ namespace KinoApp
         
         public void PopulateRandomChoices(Random kinoRandom, Random randomNumber)
         {
-            Gambler gambler = new Gambler();
+            
 
             Kinobonus = kinoRandom.Next(2) == 1;
             if(Kinobonus)
@@ -75,17 +78,17 @@ namespace KinoApp
             for (int i = 0; i < GamblerChoices.Length; i++)
             {
                 
-                gambler.GamblerChoices[i] = randomNumber.Next(1,81);
+                int ran = randomNumber.Next(1,81);
                 
 
-                if (GamblerChoices.Contains(gambler.GamblerChoices[i]))
+                if (GamblerChoices.Contains(ran))
                 {
                     i--;
                     continue;
                 }
                 else
                 {
-                    GamblerChoices[i] = gambler.GamblerChoices[i];
+                    GamblerChoices[i] = ran;
                 }
             }
 
