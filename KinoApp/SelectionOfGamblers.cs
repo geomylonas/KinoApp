@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace KinoApp
 {
-    class NumberOfGamblers
+    class SelectionOfGamblers
     {
         public List<Gambler> Gamblers {get;set;}
         public int NumberOfPlayers { get; set; }
 
-        public NumberOfGamblers()
+        public SelectionOfGamblers()
         {
             Gamblers = new List<Gambler>();
         }

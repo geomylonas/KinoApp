@@ -10,7 +10,7 @@ namespace KinoApp
     {
         public int[] GamblerChoices { get; set; }
         public bool Kinobonus { get; set; }
-        public static int Counter = 0;
+        public static int Counter = 1;
         public int GamblerID { get; private set; }
 
         public Gambler()

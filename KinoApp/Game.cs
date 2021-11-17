@@ -61,22 +61,19 @@ namespace KinoApp
             }
         }
 
-        public void PlayGame()
+        public void PlayGame(SelectionOfGamblers selectionOfGamblers)
         {
-            NumberOfGamblers numberOfGamblers = new NumberOfGamblers();
-            numberOfGamblers.PopulateGamblers();
             KinoDraw.DrawNumbers();
             Console.WriteLine(KinoDraw.ToString());
-            foreach (var gambler in numberOfGamblers.Gamblers)
+            foreach (var gambler in selectionOfGamblers.Gamblers)
             {
                 CheckNumbers(gambler);
                 int numbersFound = NumbersFoundPerPlayer[gambler].Count;
 
-                Console.WriteLine($"Gambler number {gambler.GamblerID} has matched {numbersFound} numbers!");
+                Console.WriteLine($"Gambler  {gambler.GamblerID} has matched {numbersFound} numbers!");
                 int index = (numbersFound * 2 - 1 > 0 ? numbersFound * 2 - 1 : 0);
                 if (gambler.Kinobonus)
                 {
-                    CheckKinoBonus(gambler);
                     if (CheckKinoBonus(gambler))
                     {
                         WinnersCategory[numbersFound * 2].Add(gambler);
