@@ -14,6 +14,20 @@ namespace KinoApp
         public Dictionary<Gambler,List<int>> NumbersFoundPerPlayer { get; set; }
         public List<Gambler>[] WinnersCategory { get; set; }
 
+        public static double Bonus { get; set; }
+
+        public static double InitialReward { get; set; }
+        public double GameReward { get; set; }
+        public static double[] RewardPercentages { get; set; }
+
+        static Game ()
+        {
+            Bonus = 0;
+            InsertReward();
+            RewardPercentages = new double[12] { 0.2, 0.4, 0.6, 0.8, 1, 2, 3, 5, 7, 15, 23, 35 };
+        }
+
+        
 
         public Game()
         {
@@ -25,13 +39,22 @@ namespace KinoApp
             Gambler = new Gambler();
             KinoDraw = new KinoDraw();
             NumbersFoundPerPlayer = new Dictionary<Gambler,List<int>>();
+
+            GameReward = InitialReward + Bonus;
         }
-        //public Game(Gambler gambler, KinoDraw kinoDraw)
-        //{
-        //    Gambler = gambler;
-        //    KinoDraw = kinoDraw;
-        //    NumbersFound = new List<int>();
-        //}
+        
+        private static void InsertReward()
+        {
+            double initialReward;
+            bool isDouble;
+
+            do
+            {
+                Console.WriteLine("\n \nGive the Reward");
+                isDouble = double.TryParse(Console.ReadLine(), out initialReward);
+            } while (!isDouble);
+            InitialReward = initialReward;
+        }
 
         public Dictionary<Gambler,List<int>> CheckNumbers(Gambler gambler)
         {
@@ -102,8 +125,31 @@ namespace KinoApp
                 }
             }
 
-           
+            Bonus = CalculateReward();
 
+        }
+
+
+
+        public double CalculateReward()
+        {
+            
+            double result = 0;
+            for (int i = WinnersCategory.Length-1; i > 0; i--)
+            {
+                if (WinnersCategory[i].Count > 0)
+                {
+                    Console.WriteLine($"In category {(i+1) / 2} {(i % 2 == 0 ? '+' : ' ')} the reward is {(RewardPercentages[i-1]/100 * GameReward).ToString("#.##")}");
+                }
+                else
+                {
+                    Console.WriteLine($"There was no winner in category {(i+1) / 2} {(i % 2 == 0 ? '+' : ' ')}");
+                    result += RewardPercentages[i - 1] / 100 * GameReward;
+                   
+                }
+                
+            }
+            return result;
         }
 
     }

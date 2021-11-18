@@ -47,6 +47,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="KinoDraw.cs" />
     <Compile Include="MultipleKinoDraws.cs" />
+    <Compile Include="Reward.cs" />
     <Compile Include="SelectionOfGamblers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
