@@ -10,7 +10,7 @@ namespace KinoApp
     {
         List<Game> Games { get; set; }
         SelectionOfGamblers selectionOfGamblers { get; set; }
-        List<KinoDraw> KinoDraws { get; set; }
+        public List<KinoDraw> KinoDraws { get; set; }
         private int _numberOfKinoDraws;
         public int NumberOfKinoDraws
         {
@@ -29,6 +29,7 @@ namespace KinoApp
         public void PlayKino()
         {
             Game game;
+            Statistics stats;
             bool isInt;
 
             do
@@ -48,7 +49,8 @@ namespace KinoApp
                 Games.Add(game);
             
             }
-
+            stats = new Statistics(KinoDraws);
+            stats.GenerateStatistics();
 
         }
 
