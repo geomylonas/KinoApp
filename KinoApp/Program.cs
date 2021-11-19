@@ -10,8 +10,6 @@ namespace KinoApp
     {
         static void Main(string[] args)
         {
-
-
             //Game game = new Game();
             //game.PlayGame();
 
@@ -20,8 +18,6 @@ namespace KinoApp
 
             MultipleKinoDraws multipleKinoDraws = new MultipleKinoDraws();
             multipleKinoDraws.PlayKino();
-
-
 
         }
 

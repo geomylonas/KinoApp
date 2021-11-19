@@ -18,9 +18,6 @@ namespace KinoApp
             set { _numberOfKinoDraws = value; }
         }
 
-
-
-
         public MultipleKinoDraws()
         {
             Games = new List<Game>();
@@ -39,12 +36,13 @@ namespace KinoApp
                 Console.WriteLine("\n \nGive number of draws");
                 isInt = int.TryParse(Console.ReadLine(), out _numberOfKinoDraws);
             } while (!isInt);
+            Game.InsertReward();
 
-           
             for (int i = 0; i < _numberOfKinoDraws; i++)
             {
-                game = new Game();
+                Console.WriteLine("\n-------------------------------------");
                 Console.WriteLine($"Kino Draw {i+1}");
+                game = new Game();
                 game.PlayGame(selectionOfGamblers);
                 KinoDraws.Add(game.KinoDraw);
                 Games.Add(game);

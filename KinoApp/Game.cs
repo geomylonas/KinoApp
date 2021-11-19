@@ -19,18 +19,19 @@ namespace KinoApp
         public static double InitialReward { get; set; }
         public double GameReward { get; set; }
         public static double[] RewardPercentages { get; set; }
+        public static double Charity { get; set; }
 
         static Game ()
         {
             Bonus = 0;
-            InsertReward();
+            Charity = 0;
             RewardPercentages = new double[12] { 0.2, 0.4, 0.6, 0.8, 1, 2, 3, 5, 7, 15, 23, 35 };
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
         }
-
-        
 
         public Game()
         {
+            
             WinnersCategory = new List<Gambler>[13];
             for (int i = 0; i < WinnersCategory.Length; i++)
             {
@@ -41,9 +42,11 @@ namespace KinoApp
             NumbersFoundPerPlayer = new Dictionary<Gambler,List<int>>();
 
             GameReward = InitialReward + Bonus;
+            Console.WriteLine($"The total amount distributed for this Draw is: {GameReward}€");
+            Charity += CharityReward(); 
         }
         
-        private static void InsertReward()
+        public static void InsertReward()
         {
             double initialReward;
             bool isDouble;
@@ -129,8 +132,6 @@ namespace KinoApp
 
         }
 
-
-
         public double CalculateReward()
         {
             
@@ -139,18 +140,25 @@ namespace KinoApp
             {
                 if (WinnersCategory[i].Count > 0)
                 {
-                    Console.WriteLine($"In category {(i+1) / 2} {(i % 2 == 0 ? '+' : ' ')} the reward is {(RewardPercentages[i-1]/100 * GameReward).ToString("#.##")}");
+                    double categoryReward = (RewardPercentages[i - 1] / 100 * GameReward);
+                    Console.WriteLine($"In category {(i+1) / 2} {(i % 2 == 0 ? '+' : ' ')} the reward is {categoryReward.ToString("#.##")}€");
+                    Console.WriteLine($"The reward per player is {(categoryReward/WinnersCategory[i].Count).ToString("#.##")}€");
                 }
                 else
                 {
                     Console.WriteLine($"There was no winner in category {(i+1) / 2} {(i % 2 == 0 ? '+' : ' ')}");
-                    result += RewardPercentages[i - 1] / 100 * GameReward;
-                   
+                    result += RewardPercentages[i - 1] / 100 * GameReward;  
                 }
                 
             }
             return result;
         }
 
+        double CharityReward()
+        {
+            double result = GameReward * 0.07;
+            Console.WriteLine($"The amount of {result}€ goes to Charity!!!");
+            return result;
+        }
     }
 }
