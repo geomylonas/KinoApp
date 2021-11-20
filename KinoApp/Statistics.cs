@@ -40,7 +40,7 @@ namespace KinoApp
             {
                 number = maxFrequency.Max();
                 index = Array.IndexOf(maxFrequency, number);
-                Console.Write(number + "\t");
+                Console.Write(index + 1 + "\t");
                 maxFrequency[index] = 0;
             }
         }
@@ -49,22 +49,28 @@ namespace KinoApp
             int[] minFrequency = new int[80];
             Array.Copy(NumberFrequency, minFrequency, 80);
             int number;
+            int minNotZero = minFrequency.Where(x => x != 0).DefaultIfEmpty().Min(); // filters out the 0 values
             int index;
             int maxNumber;
-            Console.WriteLine("The 3 most appeared numbers are:");
+            Console.WriteLine("\nThe 3 least appeared numbers are:");
             for (int i = 0; i < 3; i++)
             {
                 number = minFrequency.Min();
-                index = Array.IndexOf(minFrequency, number);
+                index = Array.IndexOf(minFrequency, minNotZero);
                 maxNumber = minFrequency.Max();
-                Console.Write(number + "\t");
+                Console.Write(index + 1 + "\t");
                 minFrequency[index] = maxNumber;
             }
         }
         public void MinMaxKinoBonus()
         {
-            Console.WriteLine($"Kino Bonus least appeard number is: {KinoBonusFrequency.Min()}");
-            Console.WriteLine($"Kino Bonus most appeard number is: {KinoBonusFrequency.Max()}");
+            int minNotZero = KinoBonusFrequency.Where(x => x != 0).DefaultIfEmpty().Min(); // filters out the 0 values
+            int indexMin = Array.IndexOf(KinoBonusFrequency, minNotZero);
+            int indexMax = Array.IndexOf(KinoBonusFrequency, KinoBonusFrequency.Max()); 
+            Console.WriteLine($"\nKino Bonus most appeard number is: {indexMax + 1}");
+            Console.WriteLine($"\nKino Bonus least appeard number is: {indexMin + 1}");
+         
+            
         }
         public void GenerateStatistics()
         {
