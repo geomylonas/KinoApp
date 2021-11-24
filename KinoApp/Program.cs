@@ -10,11 +10,6 @@ namespace KinoApp
     {
         static void Main(string[] args)
         {
-            //Game game = new Game();
-            //game.PlayGame();
-
-            //Gambler g = new Gambler();
-            //g.PopulateRandomChoices();
 
             MultipleKinoDraws multipleKinoDraws = new MultipleKinoDraws();
             multipleKinoDraws.PlayKino();

@@ -25,17 +25,17 @@ namespace KinoApp
         {
             Bonus = 0;
             Charity = 0;
-            RewardPercentages = new double[12] { 0.2, 0.4, 0.6, 0.8, 1, 2, 3, 5, 7, 15, 23, 35 };
+            RewardPercentages = new double[12] { 0.2, 0.4, 0.6, 0.8, 1, 2, 3, 5, 7, 15, 23, 35 }; // Array that helps to calculate the Reward Per Winning Category
             Console.OutputEncoding = System.Text.Encoding.UTF8;
         }
 
         public Game()
         {
             
-            WinnersCategory = new List<Gambler>[13];
+            WinnersCategory = new List<Gambler>[13]; // Array that contains 13 lists with every Category of Matching Numbers (+Kino Bonus) Per Gambler
             for (int i = 0; i < WinnersCategory.Length; i++)
             {
-                WinnersCategory[i] = new List<Gambler>();
+                WinnersCategory[i] = new List<Gambler>(); // Initialization
             }
             Gambler = new Gambler();
             KinoDraw = new KinoDraw();
@@ -59,6 +59,8 @@ namespace KinoApp
             InitialReward = initialReward;
         }
 
+
+        // Method that Checks how many Numbers a Gambler has matched and returns a Dictionary with the Gambler's successful matches
         public Dictionary<Gambler,List<int>> CheckNumbers(Gambler gambler)
         {
             List<int> listOfSuccesses = new List<int>();
@@ -73,6 +75,7 @@ namespace KinoApp
             return NumbersFoundPerPlayer;
         }
 
+        // Check if Gambler has matched Kino Bonus
         public bool CheckKinoBonus(Gambler gambler)
         {
             if (NumbersFoundPerPlayer[gambler].Contains(KinoDraw.Numbers[KinoDraw.Numbers.Length - 1]))
@@ -132,6 +135,8 @@ namespace KinoApp
 
         }
 
+
+        // Method that Calculates the Reward per Winning Category and per Gambler, if there is no Winner then the winning amount adds to the Next Kino Draw Reward
         public double CalculateReward()
         {
             
@@ -154,6 +159,7 @@ namespace KinoApp
             return result;
         }
 
+        // Method that calculates the amount of money for Charity
         double CharityReward()
         {
             double result = GameReward * 0.07;

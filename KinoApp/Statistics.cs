@@ -14,9 +14,10 @@ namespace KinoApp
 
         public Statistics(List<KinoDraw> listOfKinoDraws){
             ListOfKinoDraws = listOfKinoDraws;
-            NumberFrequency = new int [80];
-            KinoBonusFrequency = new int [80];
+            NumberFrequency = new int [80]; // Array default Initialization that consists of 80 elements, this Array calculates how many times each number has been drawn
+            KinoBonusFrequency = new int [80]; // Array default Initialization that consists of 80 elements, this Array calculates how many times each number has been drawn as Kino Bonus
         }
+
 
         public void FindNumberFrequency()
         {
@@ -24,12 +25,14 @@ namespace KinoApp
             {
                 for (int i = 0; i < kinoDraw.Numbers.Length; i++)
                 {
-                    NumberFrequency[kinoDraw.Numbers[i]-1] ++;
+                    NumberFrequency[kinoDraw.Numbers[i]-1] ++; // for each number found in Array Numbers, add 1 in NumberFrequency's corresponding element
                 }
-                    KinoBonusFrequency[kinoDraw.Numbers[kinoDraw.Numbers.Length-1]-1] ++;
+                    KinoBonusFrequency[kinoDraw.Numbers[kinoDraw.Numbers.Length-1]-1] ++; // for each element in Array Numbers, add 1 in KinoBonusFrequency's corresponding element
             }
         }
-        public void FindMax()
+
+        // Calculates the 3 most appeared numbers using the Array Method Max() on a Copy NumberFrequency Array
+        public void FindMax() 
         {
             int[] maxFrequency = new int [80];
             Array.Copy(NumberFrequency, maxFrequency, 80);
@@ -44,6 +47,9 @@ namespace KinoApp
                 maxFrequency[index] = 0;
             }
         }
+
+
+        // Calculates the 3 most least numbers not including elements == 0 using the Array Method Min() on a Copy NumberFrequency Array
         public void FindMin()
         {
             int[] minFrequency = new int[80];

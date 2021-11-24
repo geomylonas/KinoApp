@@ -13,7 +13,7 @@ namespace KinoApp
 
         public KinoDraw()
         {
-            Numbers = new int[12];
+            Numbers = new int[12]; // Array Initialization, this Array contains the Kino Numbers
         }
 
         int counter = 0;

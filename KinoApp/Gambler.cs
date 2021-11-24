@@ -15,10 +15,10 @@ namespace KinoApp
 
         public Gambler()
         {
-            GamblerChoices = new int[6];
+            GamblerChoices = new int[6]; // Array that contains the chosen numbers by the Gambler
             GamblerID = Counter++;
         }
-
+        // Method for Inputting Numbers Manually, not used in the last version of the Program
         public void PopulateChoices()
         {
             bool isInt;
@@ -64,7 +64,6 @@ namespace KinoApp
         public void PopulateRandomChoices(Random kinoRandom, Random randomNumber)
         {
             
-
             Kinobonus = kinoRandom.Next(2) == 1;
             if(Kinobonus)
             {
@@ -92,10 +91,6 @@ namespace KinoApp
                 }
             }
 
-            //foreach (var item in gambler.GamblerChoices)
-            //{
-            //    Console.Write(item + "\t");
-            //}
         }
 
 

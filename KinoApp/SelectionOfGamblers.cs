@@ -35,10 +35,6 @@ namespace KinoApp
                 Gamblers.Add(gambler);
             }
             
-            //foreach (var item in Gamblers)
-            //{
-            //    Console.WriteLine(item);
-            //}
         }
     }
 }
