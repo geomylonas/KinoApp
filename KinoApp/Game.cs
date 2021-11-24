@@ -42,7 +42,7 @@ namespace KinoApp
             NumbersFoundPerPlayer = new Dictionary<Gambler,List<int>>();
 
             GameReward = InitialReward + Bonus;
-            Console.WriteLine($"The total amount distributed for this Draw is: {GameReward}€");
+            Console.WriteLine($"The total amount distributed for this Draw is: {GameReward.ToString("#.##")}€");
             Charity += CharityReward(); 
         }
         
@@ -157,7 +157,7 @@ namespace KinoApp
         double CharityReward()
         {
             double result = GameReward * 0.07;
-            Console.WriteLine($"The amount of {result}€ goes to Charity!!!");
+            Console.WriteLine($"The amount of {result.ToString("#.##")}€ goes to Charity!!!");
             return result;
         }
     }

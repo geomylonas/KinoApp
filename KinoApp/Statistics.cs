@@ -25,8 +25,8 @@ namespace KinoApp
                 for (int i = 0; i < kinoDraw.Numbers.Length; i++)
                 {
                     NumberFrequency[kinoDraw.Numbers[i]-1] ++;
-                    KinoBonusFrequency[kinoDraw.Numbers[kinoDraw.Numbers.Length-1]-1] ++;
                 }
+                    KinoBonusFrequency[kinoDraw.Numbers[kinoDraw.Numbers.Length-1]-1] ++;
             }
         }
         public void FindMax()
@@ -48,16 +48,14 @@ namespace KinoApp
         {
             int[] minFrequency = new int[80];
             Array.Copy(NumberFrequency, minFrequency, 80);
-            int number;
-            int minNotZero = minFrequency.Where(x => x != 0).DefaultIfEmpty().Min(); // filters out the 0 values
             int index;
             int maxNumber;
             Console.WriteLine("\nThe 3 least appeared numbers are:");
             for (int i = 0; i < 3; i++)
             {
-                number = minFrequency.Min();
-                index = Array.IndexOf(minFrequency, minNotZero);
+                int minNotZero = minFrequency.Where(x => x != 0).DefaultIfEmpty().Min(); // filters out the 0 values
                 maxNumber = minFrequency.Max();
+                index = Array.IndexOf(minFrequency, minNotZero);
                 Console.Write(index + 1 + "\t");
                 minFrequency[index] = maxNumber;
             }
